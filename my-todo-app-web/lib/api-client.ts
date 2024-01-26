@@ -11,7 +11,9 @@ class ApiClient {
   }
 
   async getTodos() {
-    const response = await fetch(`${this.baseUrl}/todos`);
+    const response = await fetch(`${this.baseUrl}/todos`, {
+      cache: 'no-store',
+    });
     return response.json();
   }
 

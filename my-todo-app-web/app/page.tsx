@@ -1,8 +1,9 @@
 import apiClientInstance, { ToDo } from "../lib/api-client";
 
 const TodoItem = ( props: { todo: ToDo }) => (
-  <div>
-    <h2>{props.todo.task}</h2>
+  <div className="border border-gray-300 p-4 my-4 rounded bg-gray-100 shadow-md">
+    <h2 className="border-b border-gray-400 pb-2 mb-4 text-lg font-bold">ID: {props.todo.id}</h2>
+    <p className="text-base text-gray-700">Task: {props.todo.task}</p>
   </div>
 );
 
