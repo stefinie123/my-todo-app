@@ -1,16 +1,29 @@
+"use client"; // This is a client component
+
+import { ToDo } from "@/types/todo";
 import Link from "next/link";
-import apiClientInstance, { ToDo } from "../lib/api-client";
+import "./globals.css";
+// import apiClientInstance, { ToDo } from "../lib/api-client";
+import { useEffect, useState } from "react";
 
 const TodoItem = ( props: { todo: ToDo }) => (
   <div className="border border-gray-300 p-4 my-4 rounded bg-gray-100 shadow-md">
-    <h2 className="border-b border-gray-400 pb-2 mb-4 text-lg font-bold">ID: {props.todo.id}</h2>
+    <h2 className="border-b border-gray-400 pb-2 mb-4 text-lg font-bold text-gray-700">ID: {props.todo.id}</h2>
     <p className="text-base text-gray-700">Task: {props.todo.task}</p>
   </div>
 );
 
-export default async function Home() {
+export default function Home() {
 
-  const todos = await apiClientInstance.getTodos();
+//   const todos = await fetch('/api/todos').then(res => res.json());
+
+  const [todos, setTodos] = useState<ToDo[]>([]);
+
+  useEffect(() => {
+    fetch('/api/todos')
+      .then(res => res.json())
+      .then(data => setTodos(data));
+  }, []);
   
   return (
     <main className="flex min-h-screen items-center justify-center p-24">

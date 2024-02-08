@@ -10,7 +10,13 @@ export async function createTodo(formData: FormData) {
         task: formData.get('task') as string,
     }
      try {
-        await apiClientInstance.createTodo(todo);
+        await fetch('/api/todos', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(todo),
+          });
     } catch (error) {
         throw new Error(`Error: ${error}`);
     }

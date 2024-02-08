@@ -1,12 +1,35 @@
 "use client"
 
 import React from "react";
-import { createTodo } from "./actions";
+// import { createTodo } from "./actions";
+import { revalidatePath } from "next/cache";
+import { redirect } from "next/navigation";
 
 export default function CreatePage() {
     const [taskId, setTaskId] = React.useState("");
     const [taskLabel, setTaskLabel] = React.useState("");
     const [error, setError] = React.useState("");
+
+    async function createTodo(formData: FormData) {
+        const todo = {
+            id: formData.get('id') as string,
+            task: formData.get('task') as string,
+        }
+         try {
+            await fetch('/api/todos', {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(todo),
+              });
+        } catch (error) {
+            throw new Error(`Error: ${error}`);
+        }
+    
+        // revalidatePath('/');
+        redirect('/');
+    }
 
     return (
         <main className="flex min-h-screen flex-col items-center justify-between p-24">
