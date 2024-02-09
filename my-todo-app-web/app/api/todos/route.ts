@@ -1,21 +1,16 @@
 import { ToDo } from '@/types/todo';
-import { NextApiRequest, NextApiResponse } from 'next';
 
 let todos: ToDo[] = [{
   id: 1,
   task: 'Buy Milk',
-  done: false
+  done: true
 }, {
   id: 2,
-  task: 'Buy Bread',
+  task: 'Pay Utility Bills',
   done: false
 }, {
   id: 3,
-  task: 'Buy Cheese',
-  done: false
-}, {
-  id: 4,
-  task: 'Buy Butter',
+  task: 'Pick up Randy after Soccer',
   done: false
 }];
 
